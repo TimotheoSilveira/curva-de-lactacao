@@ -31,7 +31,7 @@ Este aplicativo analisa dados de produção de leite utilizando o **Modelo de La
 with st.sidebar:
     st.header("⚙️ Configurações")
     lactation_length = st.number_input("Duração Padrão da Lactação (dias)", min_value=100, max_value=500, value=305, step=5)
-    
+
     st.header("📋 Insira seus Dados")
     st.markdown("Cole abaixo os dados no formato `Dia,Produção`. Cada linha deve conter um par Dia/Produção.")
 
@@ -62,7 +62,7 @@ if st.button("📈 Analisar Curva de Lactação"):
             for linha in linhas:
                 dia, producao = linha.split(',')
                 dados.append([int(dia), float(producao)])
-            
+
             df = pd.DataFrame(dados, columns=['DIM', 'Produção'])
             dim = df['DIM'].values
             producao_leite = df['Produção'].values
@@ -83,19 +83,19 @@ if st.button("📈 Analisar Curva de Lactação"):
 
             with col1:
                 st.subheader("📊 Indicadores de Desempenho")
-                st.metric(label="Pico de Produção Diária", value=f"{pico_producao:.2f} kg/dia")
-                st.metric(label="Tempo até o Pico", value=f"{tempo_pico:.1f} dias")
+                st.metric(label="Pico de Produção Diária", value=f"{pico_producao:.2f}".replace('.', ',') + " kg/dia")
+                st.metric(label="Tempo até o Pico", value=f"{tempo_pico:.1f}".replace('.', ',') + " dias")
                 st.metric(label=f"Produção Total em {lactation_length} dias", value=f"{producao_total:.0f} kg")
-                st.metric(label="Persistência da Lactação", value=f"{persistencia:.1f} %", help="Mede a capacidade de manter a produção após o pico. Quanto maior, melhor.")
+                st.metric(label="Persistência da Lactação", value=f"{persistencia:.1f}".replace('.', ',') + " %")
 
             with col2:
                 st.subheader("🔬 Parâmetros do Modelo")
                 st.info(f"""
                 Modelo utilizado: **Y(t) = a * t^b * e^(-ct)**
 
-                - **Parâmetro 'a'**: {a:.4f} (Fator de escala inicial)
-                - **Parâmetro 'b'**: {b:.4f} (Taxa de inclinação pré-pico)
-                - **Parâmetro 'c'**: {c:.4f} (Taxa de queda pós-pico)
+                - **Parâmetro 'a'**: {a:.4f}".replace('.', ',') + " (Fator de escala inicial)
+                - **Parâmetro 'b'**: {b:.4f}".replace('.', ',') + " (Taxa de inclinação pré-pico)
+                - **Parâmetro 'c'**: {c:.4f}".replace('.', ',') + " (Taxa de queda pós-pico)
                 """)
 
             st.subheader("📈 Visualização da Curva de Lactação")
@@ -105,8 +105,8 @@ if st.button("📈 Analisar Curva de Lactação"):
             fig, ax = plt.subplots(figsize=(12, 6))
             ax.scatter(dim, producao_leite, label='Dados Originais', color='blue', zorder=5)
             ax.plot(t_suave, y_suave, label="Curva Ajustada (Wood)", color='red', linewidth=2)
-            ax.axvline(tempo_pico, color='green', linestyle='--', label=f'Pico aos {tempo_pico:.1f} dias')
-            ax.axhline(pico_producao, color='orange', linestyle='--', label=f'Pico: {pico_producao:.2f} kg')
+            ax.axvline(tempo_pico, color='green', linestyle='--', label=f'Pico aos {tempo_pico:.1f}'.replace('.', ',') + ' dias')
+            ax.axhline(pico_producao, color='orange', linestyle='--', label=f'Pico: {pico_producao:.2f}'.replace('.', ',') + ' kg')
 
             ax.set_title('Análise da Curva de Lactação', fontsize=16)
             ax.set_xlabel('Dias em Lactação (DIM)', fontsize=12)
