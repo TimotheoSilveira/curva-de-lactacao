@@ -93,9 +93,9 @@ if st.button("📈 Analisar Curva de Lactação"):
                 st.info(f"""
                 Modelo utilizado: **Y(t) = a * t^b * e^(-ct)**
 
-                - **Parâmetro 'a'**: {a:.4f}".replace('.', ',') + " (Fator de escala inicial)
-                - **Parâmetro 'b'**: {b:.4f}".replace('.', ',') + " (Taxa de inclinação pré-pico)
-                - **Parâmetro 'c'**: {c:.4f}".replace('.', ',') + " (Taxa de queda pós-pico)
+                - **Parâmetro 'a'**: {a:.4f}"+ " (Fator de escala inicial)
+                - **Parâmetro 'b'**: {b:.4f}"+ " (Taxa de inclinação pré-pico)
+                - **Parâmetro 'c'**: {c:.4f}"+ " (Taxa de queda pós-pico)
                 """)
 
             st.subheader("📈 Visualização da Curva de Lactação")
