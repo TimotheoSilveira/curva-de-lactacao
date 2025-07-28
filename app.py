@@ -33,9 +33,9 @@ with st.sidebar:
     lactation_length = st.number_input("Duração Padrão da Lactação (dias)", min_value=100, max_value=500, value=305, step=5)
 
     st.header("📋 Insira seus Dados")
-    st.markdown("Cole abaixo os dados no formato `Dia,Produção`. Cada linha deve conter um par Dia/Produção.")
+    st.markdown("Cole abaixo os dados no formato `Dia;Produção`, usando **ponto e vírgula (;)** como separador e **vírgula (,)** como decimal.\n\nExemplo:\n```\n15;25,5\n30;35,1\n```")
 
-    dados_exemplo = """15,25.5
+    dados_exemplo = """15;25,5
 30,35.1
 45,40.2
 60,42.5
@@ -60,8 +60,8 @@ if st.button("📈 Analisar Curva de Lactação"):
         else:
             dados = []
             for linha in linhas:
-                dia, producao = linha.split(',')
-                dados.append([int(dia), float(producao)])
+                dia, producao = linha.split(';')
+                dados.append([int(dia), float(producao.replace(',', '.'))])
 
             df = pd.DataFrame(dados, columns=['DIM', 'Produção'])
             dim = df['DIM'].values
