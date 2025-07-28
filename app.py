@@ -36,18 +36,18 @@ with st.sidebar:
     st.markdown("Cole abaixo os dados no formato `Dia;Produção`, usando **ponto e vírgula (;)** como separador e **vírgula (,)** como decimal.\n\nExemplo:\n```\n15;25,5\n30;35,1\n```")
 
     dados_exemplo = """15;25,5
-30,35.1
-45,40.2
-60,42.5
-75,41.8
-90,40.1
-120,38.5
-150,36.2
-180,34.0
-210,31.5
-240,29.1
-270,26.8
-300,24.5"""
+30;35,1
+45;40,2
+60;42,5
+75;41,8
+90;40,1
+120;38,5
+150;36,2
+180;34,0
+210;31,5
+240;29,1
+270;26,8
+300;24,5"""
 
     data_input = st.text_area("Dados de Produção de Leite (Dia, Produção)", value=dados_exemplo, height=300)
 
@@ -118,4 +118,4 @@ if st.button("📈 Analisar Curva de Lactação"):
 
     except Exception as e:
         st.error(f"Ocorreu um erro: {e}")
-        st.warning("Verifique se os dados estão corretamente formatados (ex: `30,25.5`) com uma linha por ponto e ao menos 5 registros.")
+        st.warning("Verifique se os dados estão corretamente formatados (ex: `30;25,5`) com uma linha por ponto e ao menos 5 registros.")
